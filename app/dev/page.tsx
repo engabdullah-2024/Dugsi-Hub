@@ -39,7 +39,7 @@ const Dev = () => {
           <FaCheckCircle className="text-pink-600 w-7 h-7" title="Verified" />
         </div>
         <p className="text-pink-600 text-lg font-semibold mt-1 mb-2">
-          CEO & Founder of Dugsi Tech
+          CEO & Founder of Dugsi Hub
         </p>
         <p className="text-gray-600 mb-6">Fullstack Developer / UI Designer</p>
 
