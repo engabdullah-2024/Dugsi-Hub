@@ -22,6 +22,7 @@ const navLinks = [
   { href: '/exam', label: 'Exam', icon: <FaBook /> },
   { href: '/contact', label: 'Contact', icon: <FaPhone /> },
   { href: '/dev', label: 'Dev', icon: <FaUserAlt /> },
+  { href: '/docs', label: 'Docs', icon: <FaUserAlt /> },
   { href: '/sources', label: 'Sources', icon: <FaVideo /> },
 ];
 
