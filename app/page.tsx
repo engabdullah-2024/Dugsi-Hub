@@ -3,31 +3,40 @@
 import Link from 'next/link';
 import { FaWhatsapp } from 'react-icons/fa';
 import DugsiHubLogo from './components/DugsiHubLogo';
+import { ModeToggle } from './components/ModeToggle'; // Adjust path if needed
 
 const Hero = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 pt-20">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 pt-20 bg-white dark:bg-gray-900 transition-colors duration-500">
+      {/* Dark Mode Toggle top-right */}
+      <div className="fixed top-4 right-4 z-50">
+        <ModeToggle />
+      </div>
+
       {/* Logo */}
       <DugsiHubLogo className="w-24 h-24 mb-8" />
 
-      <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 mb-6">
-        Welcome to <span className="text-pink-600">Dugsi Hub</span>
+      {/* Heading */}
+      <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-gray-100 mb-6">
+        Welcome to <span className="text-pink-600 dark:text-pink-400">Dugsi Hub</span>
       </h1>
 
-      <p className="text-xl md:text-2xl text-gray-700 mb-8 text-center max-w-xl">
+      {/* Description */}
+      <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 text-center max-w-xl">
         Empowering Grade 12 Students with Free Exam Resources – Access PDFs and Study Materials Effortlessly.
       </p>
 
+      {/* Buttons */}
       <div className="flex justify-center gap-4 flex-wrap">
         <Link
           href="/exam"
-          className="bg-pink-600 text-white px-6 py-3 rounded-xl hover:bg-pink-700 transition duration-300"
+          className="bg-pink-600 text-white px-6 py-3 rounded-xl hover:bg-pink-700 dark:hover:bg-pink-500 transition duration-300"
         >
           View All Exams
         </Link>
         <Link
           href="/about"
-          className="bg-white border border-pink-600 text-pink-600 px-6 py-3 rounded-xl hover:bg-pink-50 transition duration-300"
+          className="bg-white border border-pink-600 text-pink-600 px-6 py-3 rounded-xl hover:bg-pink-50 dark:bg-gray-800 dark:text-pink-400 dark:border-pink-400 dark:hover:bg-pink-900 transition duration-300"
         >
           About Dugsi Hub
         </Link>
