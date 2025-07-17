@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ClipboardIcon, CheckIcon } from '@heroicons/react/outline';
 
 const contributors = [
   {
@@ -16,7 +18,37 @@ const contributors = [
   },
 ];
 
+const repos = [
+  {
+    name: 'Dugsi Hub',
+    description: 'Main educational platform source code',
+    url: 'https://github.com/engabdullah-2024/Dugsi-Hub.git',
+  },
+  {
+    name: 'Dugsi Hub Mobile',
+    description: 'Mobile app repository',
+    url: 'https://github.com/engabdullah-2024/Dugsi-Hub-Mobile.git',
+  },
+  {
+    name: 'Dugsi Hub Backend',
+    description: 'Backend API for Dugsi Hub',
+    url: 'https://github.com/engabdullah-2024/Dugsi-Hub-Backend.git',
+  },
+];
+
 const DocsPage = () => {
+  const [copiedCommand, setCopiedCommand] = useState<string | null>(null);
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedCommand(text);
+      setTimeout(() => setCopiedCommand(null), 2000);
+    } catch {
+      alert('Failed to copy!');
+    }
+  };
+
   return (
     <main
       className="
@@ -61,55 +93,86 @@ const DocsPage = () => {
         </ul>
       </section>
 
-      {/* How to Download & Use */}
+      {/* Clone Commands Section */}
       <section>
-        <h2 className="text-3xl font-bold text-pink-600 dark:text-pink-400 mb-4">🛠️ How to Download & Reuse the Code</h2>
-        <p className="text-gray-700 dark:text-gray-300 mb-4">
-          If you're a developer or student who wants to reuse or rebuild this project, follow these simple steps:
+        <h2 className="text-3xl font-bold text-pink-600 dark:text-pink-400 mb-6">
+          🛠️ Clone & Update Repositories
+        </h2>
+        <p className="text-gray-700 dark:text-gray-300 mb-6">
+          Use the following git commands to clone or update the repositories. Click the copy button to
+          quickly copy commands to your clipboard.
         </p>
-        <ol className="list-decimal pl-6 space-y-2 text-gray-700 dark:text-gray-300">
-          <li>
-            Visit our GitHub repo:{' '}
-            <Link
-              href="https://github.com/engabdullah-2024/Dugsi-Hub"
-              target="_blank"
-              className="text-pink-600 dark:text-pink-400 underline font-medium"
-              rel="noopener noreferrer"
-            >
-              github.com/engabdullah-2024/Dugsi-Hub
-            </Link>
-          </li>
-          <li>Click <strong>Code</strong> and choose <code>Download ZIP</code> or use Git:</li>
-          <pre className="bg-gray-100 dark:bg-gray-800 text-sm p-3 rounded-md border border-gray-300 dark:border-gray-700 overflow-x-auto">
-            git clone https://github.com/engabdullah-2024/Dugsi-Hub.git
-          </pre>
-          <li>Navigate into the project folder:</li>
-          <pre className="bg-gray-100 dark:bg-gray-800 text-sm p-3 rounded-md border border-gray-300 dark:border-gray-700 overflow-x-auto">
-            cd dugsi
-          </pre>
-          <li>Install dependencies:</li>
-          <pre className="bg-gray-100 dark:bg-gray-800 text-sm p-3 rounded-md border border-gray-300 dark:border-gray-700 overflow-x-auto">
-            npm install
-          </pre>
-          <li>Run the development server:</li>
-          <pre className="bg-gray-100 dark:bg-gray-800 text-sm p-3 rounded-md border border-gray-300 dark:border-gray-700 overflow-x-auto">
-            npm run dev
-          </pre>
-          <li>Visit <code>http://localhost:3000</code> to view the site locally.</li>
-          <li>Customize any pages under <code>/app</code> or <code>/components</code>.</li>
-          <li>
-            Want to deploy it? Just push to GitHub and connect to{' '}
-            <a
-              href="https://vercel.com"
-              target="_blank"
-              className="text-pink-600 dark:text-pink-400 underline"
-              rel="noopener noreferrer"
-            >
-              vercel.com
-            </a>
-            .
-          </li>
-        </ol>
+
+        <div className="space-y-8">
+          {repos.map(({ name, description, url }) => {
+            const cloneCommand = `git clone ${url}`;
+            const updateCommand = `cd ${name.toLowerCase().replace(/\s+/g, '-')} && git pull`;
+
+            return (
+              <div
+                key={url}
+                className="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700"
+              >
+                <h3 className="text-2xl font-semibold text-pink-600 dark:text-pink-400 mb-1">
+                  {name}
+                </h3>
+                <p className="mb-4 text-gray-600 dark:text-gray-400">{description}</p>
+
+                {/* Clone Command */}
+                <div className="mb-3">
+                  <label className="block mb-1 font-medium text-gray-700 dark:text-gray-300">
+                    Clone Command
+                  </label>
+                  <div className="relative">
+                    <pre
+                      className="bg-gray-100 dark:bg-gray-900 p-3 rounded-md overflow-x-auto text-sm font-mono border border-gray-300 dark:border-gray-700"
+                      aria-label={`Clone command for ${name}`}
+                    >
+                      {cloneCommand}
+                    </pre>
+                    <button
+                      onClick={() => copyToClipboard(cloneCommand)}
+                      aria-label="Copy clone command"
+                      className="absolute right-2 top-2 p-1 rounded-md bg-pink-600 hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-600 text-white transition"
+                    >
+                      {copiedCommand === cloneCommand ? (
+                        <CheckIcon className="w-5 h-5" />
+                      ) : (
+                        <ClipboardIcon className="w-5 h-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Update Command */}
+                <div>
+                  <label className="block mb-1 font-medium text-gray-700 dark:text-gray-300">
+                    Update Command (inside repo folder)
+                  </label>
+                  <div className="relative">
+                    <pre
+                      className="bg-gray-100 dark:bg-gray-900 p-3 rounded-md overflow-x-auto text-sm font-mono border border-gray-300 dark:border-gray-700"
+                      aria-label={`Update command for ${name}`}
+                    >
+                      {updateCommand}
+                    </pre>
+                    <button
+                      onClick={() => copyToClipboard(updateCommand)}
+                      aria-label="Copy update command"
+                      className="absolute right-2 top-2 p-1 rounded-md bg-pink-600 hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-600 text-white transition"
+                    >
+                      {copiedCommand === updateCommand ? (
+                        <CheckIcon className="w-5 h-5" />
+                      ) : (
+                        <ClipboardIcon className="w-5 h-5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </section>
 
       {/* Contributors Section */}
