@@ -1,117 +1,98 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import { useState } from 'react';
+import emailjs from '@emailjs/browser';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const Contact = () => {
+const SERVICE_ID = 'service_g501e5b';
+const TEMPLATE_ID = 'template_c06ycsp';
+const PUBLIC_KEY = '6nbY0x5vkTOwEohEU';
+
+export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState({ success: null, error: null, userEmail: '' });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const sendEmail = async e => {
     e.preventDefault();
-    setSubmitted(true);
-    setForm({ name: '', email: '', message: '' });
+
+    try {
+      const res = await emailjs.send(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY);
+      setStatus({ success: 'Message sent successfully!', error: null, userEmail: form.email });
+      setForm({ name: '', email: '', message: '' });
+    } catch (error) {
+      setStatus({ success: null, error: 'Failed to send. Please try again later.', userEmail: '' });
+    }
   };
 
   return (
-    <div
-      className="
-        min-h-screen flex flex-col items-center justify-center px-6 py-20
-        bg-gradient-to-br from-white via-pink-100 to-pink-300
-        dark:from-gray-900 dark:via-gray-800 dark:to-gray-900
-        transition-colors duration-500
-      "
-    >
-      <h1 className="text-4xl font-extrabold mb-8 text-gray-900 dark:text-white">
-        Contact Us
-      </h1>
+    <div className="max-w-xl mx-auto px-6 py-12 mt-12">
+      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-gray-100">
+        Send Us a Message
+      </h2>
 
-      {submitted && (
-        <p className="mb-6 text-green-700 dark:text-green-400 font-semibold">
-          Thank you for your message! We will get back to you soon.
-        </p>
-      )}
-
-      <form
-        onSubmit={handleSubmit}
-        className="
-          w-full max-w-md bg-white dark:bg-gray-900 rounded-lg shadow-lg p-8 space-y-6
-          transition-colors duration-300
-        "
-      >
-        <input
-          type="text"
+      <form onSubmit={sendEmail} className="space-y-6">
+        <Input
           name="name"
-          placeholder="Your Name"
           value={form.name}
           onChange={handleChange}
+          placeholder="Your Name"
           required
-          className="
-            w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg
-            bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-            focus:outline-none focus:ring-2 focus:ring-pink-500 dark:focus:ring-pink-400
-            transition-colors
-          "
         />
-        <input
-          type="email"
+        <Input
           name="email"
-          placeholder="Your Email"
           value={form.email}
           onChange={handleChange}
+          placeholder="Your Email"
+          type="email"
           required
-          className="
-            w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg
-            bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-            focus:outline-none focus:ring-2 focus:ring-pink-500 dark:focus:ring-pink-400
-            transition-colors
-          "
         />
-        <textarea
+        <Textarea
           name="message"
-          placeholder="Your Message"
           value={form.message}
           onChange={handleChange}
-          required
+          placeholder="Your Message"
           rows={5}
-          className="
-            w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg
-            bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 resize-none
-            focus:outline-none focus:ring-2 focus:ring-pink-500 dark:focus:ring-pink-400
-            transition-colors
-          "
+          required
         />
-
-        <button
-          type="submit"
-          className="
-            w-full bg-pink-600 text-white py-3 rounded-lg shadow-md
-            hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-600
-            transition
-          "
-        >
-          Send Message
-        </button>
+        <Button type="submit" className="w-full bg-pink-600 hover:bg-pink-700 text-white">
+          Send
+        </Button>
       </form>
 
-      <div className="mt-8">
-        <Link
-          href="/"
-          className="
-            inline-block bg-pink-600 text-white px-6 py-3 rounded-xl
-            hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-600
-            transition duration-300
-          "
-        >
-          Go Back to Home
-        </Link>
-      </div>
+      <AnimatePresence>
+        {status.success && (
+          <motion.div
+            key="success"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="mt-6 p-4 bg-green-100 text-green-700 rounded-xl text-center"
+          >
+            ✅ {status.success}
+            <div className="mt-1 text-sm text-green-800">Sent from: {status.userEmail}</div>
+          </motion.div>
+        )}
+
+        {status.error && (
+          <motion.div
+            key="error"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="mt-6 p-4 bg-red-100 text-red-700 rounded-xl text-center"
+          >
+            ❌ {status.error}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
-};
-
-export default Contact;
+}
