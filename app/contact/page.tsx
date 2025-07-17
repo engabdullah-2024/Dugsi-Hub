@@ -11,51 +11,39 @@ const SERVICE_ID = 'service_g501e5b';
 const TEMPLATE_ID = 'template_c06ycsp';
 const PUBLIC_KEY = '6nbY0x5vkTOwEohEU';
 
-interface FormState {
+type FormState = {
   name: string;
   email: string;
   message: string;
-}
-
-interface StatusState {
-  success: string | null;
-  error: string | null;
-  userEmail: string;
-}
+  [key: string]: string; // <-- This line is key for emailjs.send typing
+};
 
 export default function ContactForm() {
-  const [form, setForm] = useState<FormState>({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState<StatusState>({
+  const [form, setForm] = useState<FormState>({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [status, setStatus] = useState<{ success: string | null; error: string | null; userEmail: string }>({
     success: null,
     error: null,
     userEmail: '',
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm(prev => ({ ...prev, [name]: value }));
   };
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const res = await emailjs.send(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY);
-      setStatus({
-        success: 'Message sent successfully!',
-        error: null,
-        userEmail: form.email,
-      });
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY);
+      setStatus({ success: 'Message sent successfully!', error: null, userEmail: form.email });
       setForm({ name: '', email: '', message: '' });
     } catch (error) {
-      console.error(error);
-      setStatus({
-        success: null,
-        error: 'Failed to send. Please try again later.',
-        userEmail: '',
-      });
+      setStatus({ success: null, error: 'Failed to send. Please try again later.', userEmail: '' });
     }
   };
 
@@ -75,10 +63,10 @@ export default function ContactForm() {
         />
         <Input
           name="email"
-          type="email"
           value={form.email}
           onChange={handleChange}
           placeholder="Your Email"
+          type="email"
           required
         />
         <Textarea
@@ -100,13 +88,11 @@ export default function ContactForm() {
             key="success"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="mt-6 p-4 bg-green-100 text-green-700 rounded-xl text-center dark:bg-green-900 dark:text-green-300"
+            exit={{ opacity: 0 }}
+            className="mt-6 p-4 bg-green-100 text-green-700 rounded-xl text-center"
           >
             ✅ {status.success}
-            <div className="mt-1 text-sm">
-              Sent from: <strong>{status.userEmail}</strong>
-            </div>
+            <div className="mt-1 text-sm text-green-800">Sent from: {status.userEmail}</div>
           </motion.div>
         )}
 
@@ -115,8 +101,8 @@ export default function ContactForm() {
             key="error"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="mt-6 p-4 bg-red-100 text-red-700 rounded-xl text-center dark:bg-red-900 dark:text-red-300"
+            exit={{ opacity: 0 }}
+            className="mt-6 p-4 bg-red-100 text-red-700 rounded-xl text-center"
           >
             ❌ {status.error}
           </motion.div>
