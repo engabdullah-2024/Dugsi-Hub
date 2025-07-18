@@ -23,7 +23,7 @@ const Hero = () => {
 
       {/* Description */}
       <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 text-center max-w-xl">
-        Empowering Grade 12 Students with Free Exam Resources – Access PDFs and Study Materials Effortlessly.
+        Empowering Grade 12 Students — Instantly Access Free Exam PDFs & Smart Study Materials.
       </p>
 
       {/* Buttons */}

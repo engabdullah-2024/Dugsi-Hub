@@ -24,7 +24,7 @@ const navLinks = [
   { href: '/contact', label: 'Contact', icon: <FaPhone /> },
   { href: '/dev', label: 'Dev', icon: <FaUserAlt /> },
   { href: '/docs', label: 'Docs', icon: <FaFileAlt  /> },
- { href: '/sources', label: 'Sources', icon: <FaVideo /> },
+
  
 ];
 
