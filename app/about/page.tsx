@@ -23,7 +23,7 @@ const AboutPage = () => {
       <DugsiHubLogo className="w-20 h-20 md:w-28 md:h-28 mb-4" />
 
       {/* Heading */}
-      <h1 className="text-4xl md:text-5xl font-bold text-pink-700 dark:text-pink-400 text-center mb-4">
+      <h1 className="text-4xl md:text-5xl font-bold text-pink-700 dark:text-pink-z text-center mb-4">
         About <span className="text-pink-900 dark:text-pink-500">Dugsi Hub</span>
       </h1>
 
@@ -37,7 +37,7 @@ const AboutPage = () => {
         {/* Mission 1 */}
         <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 shadow-xl border dark:border-gray-800 text-center">
           <FaBookOpen className="text-pink-500 text-4xl mx-auto mb-3" />
-          <h2 className="text-xl font-semibold text-pink-700 dark:text-pink-400 mb-2">Well-Structured PDFs</h2>
+          <h2 className="text-xl font-semibold text-pink-700 dark:text-pink-400 mb-2">Well-Structured PDFs </h2>
           <p className="text-gray-700 dark:text-gray-300 text-sm">
             Download exam-ready notes organized by subject and unit.
           </p>
