@@ -1,6 +1,6 @@
 "use client";
 
-import DugsiHubLogo from "../components/DugsiHubLogo";
+
 import { ModeToggle } from "../components/ModeToggle";
 import { FaBookOpen, FaGraduationCap, FaCloudDownloadAlt } from "react-icons/fa";
 
@@ -19,8 +19,7 @@ const AboutPage = () => {
         <ModeToggle />
       </div>
 
-      {/* Logo */}
-      <DugsiHubLogo className="w-20 h-20 md:w-28 md:h-28 mb-4" />
+     
 
       {/* Heading */}
       <h1 className="text-4xl md:text-5xl font-bold text-pink-700 dark:text-pink-z text-center mb-4">

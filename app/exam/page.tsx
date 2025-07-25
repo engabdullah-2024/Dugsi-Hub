@@ -83,18 +83,14 @@ const subjects = [{ key: "Somali", icon: <FaBookOpen /> }];
 
 const pdfLinks: Record<number, Record<string, string>> = {
   2020: {
-    Somali: "/pdfs/Somali2020.pdf",
-    Islamic: "/pdfs/Islamic2020.pdf",
-    Arabic: "/pdfs/Arabic2020.pdf",
-    English: "/pdfs/English2020.pdf",
-    Math: "/pdfs/Math2020.pdf",
-    Physics: "/pdfs/Physics2020.pdf",
-    History: "/pdfs/History2020.pdf",
-    Geography: "/pdfs/Geography2020.pdf",
-    Biology: "/pdfs/Biology2020.pdf",
-    Chemistry: "/pdfs/Chemistry2020.pdf",
-    Business: "/pdfs/Business2020.pdf",
-    Technology: "/pdfs/Technology2020.pdf",
+    Somali: "/pdfs/Somali.pdf",
+
+    
+  },
+  2024: {
+    Somali: "/pdfs/Somali.pdf",
+
+    
   },
   // Add other years...
 };

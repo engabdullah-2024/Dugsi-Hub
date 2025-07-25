@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { FaWhatsapp } from 'react-icons/fa';
-import DugsiHubLogo from './components/DugsiHubLogo';
+
 import { ModeToggle } from './components/ModeToggle';
 
 const Hero = () => {
@@ -14,7 +14,7 @@ const Hero = () => {
       </div>
 
       {/* Logo */}
-      <DugsiHubLogo className="w-20 h-20 md:w-24 md:h-24 mb-6" />
+    
 
       {/* Title */}
       <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-center text-gray-900 dark:text-white leading-tight mb-4">
