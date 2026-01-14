@@ -1,6 +1,8 @@
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
 import {
     Award,
     CheckCircle2,

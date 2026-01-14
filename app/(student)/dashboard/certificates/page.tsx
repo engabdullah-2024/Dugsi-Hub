@@ -1,6 +1,8 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
 import { Award, Download, ExternalLink, Calendar, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
