@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dugsi Hub LMS 🎓
 
-## Getting Started
+Dugsi Hub is a modern, feature-rich Learning Management System (LMS) designed to provide a premium educational experience. Built with Next.js, Prisma, and Stripe, it offers a seamless platform for students and administrators.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### for Students
+- **Interactive Dashboard**: Track progress, view daily streaks, and access enrolled courses.
+- **My Learning**: A dedicated space to manage active courses and pick up where you left off.
+- **Certification System**:
+  - Earn automatic digital certificates upon course completion.
+  - **Verify**: Public verification link for every certificate.
+  - **Download/Print**: High-quality A4 PDF export for your credentials.
+  - **Hall of Fame**: Showcase all earned badges and certificates.
+- **Modern Player**: Video player with progress tracking and chapter navigation.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### for SuperAdmins
+- **Admin Dashboard**: Comprehensive overview of platform content and users.
+- **Certificate Management**:
+  - Track student completion rates.
+  - Issue certificates manually or automatically.
+  - View "Ready to Award" candidates.
+- **Course Management**: Create, edit, and publish courses with drag-and-drop curriculum builder.
+- **Analytics**: Sales performance and user engagement insights.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: Next.js 14+ (App Router)
+- **Styling**: Tailwind CSS
+- **Database**: MongoDB (via Prisma ORM)
+- **Auth**: Clerk
+- **Payments**: Stripe
+- **File Uploads**: UploadThing
 
-## Learn More
+## 🏁 Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+1.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2.  **Setup Environment**:
+    Create a `.env` file with your Clerk, Prisma, Stripe, and UploadThing keys.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3.  **Run Development Server**:
+    ```bash
+    npm run dev
+    ```
 
-## Deploy on Vercel
+4.  **Open the App**:
+    Visit [http://localhost:3000](http://localhost:3000)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📜 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2026 Dugsi Hub. All rights reserved.
