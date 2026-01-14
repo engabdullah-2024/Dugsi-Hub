@@ -104,7 +104,9 @@ export function Header() {
                                 {item.name}
                             </Link>
                         ))}
-                        <div className="pt-4 space-y-2">
+                        <p className="text-xs text-slate-500">
+                            © {new Date().getFullYear()} Dugsi Hub. All rights reserved.
+                        </p>                <div className="pt-4 space-y-2">
                             {isSignedIn ? (
                                 <>
                                     <Link
