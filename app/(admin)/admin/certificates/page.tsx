@@ -58,7 +58,7 @@ export default async function AdminCertificatesPage() {
         }
     });
 
-    const completionData = enrollments.map((env) => {
+    const completionData = enrollments.map((env: any) => {
         const totalLessons = env.course.lessons.length;
         const userProgress = env.user.progress.filter((p: any) =>
             env.course.lessons.some((l: any) => l.id === p.lessonId) && p.isCompleted
@@ -127,7 +127,7 @@ export default async function AdminCertificatesPage() {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-50">
-                            {completionData.map((data) => (
+                            {completionData.map((data: any) => (
                                 <tr key={`${data.userId}-${data.courseId}`} className="hover:bg-slate-50 transition-all group">
                                     <td className="px-8 py-6">
                                         <div className="flex items-center gap-4">
