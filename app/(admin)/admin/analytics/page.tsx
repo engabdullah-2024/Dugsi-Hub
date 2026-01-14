@@ -2,6 +2,8 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { DollarSign, UserCheck, TrendingUp, BarChart3 } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
+
 import { getAnalytics } from "@/app/actions/get-analytics";
 import { DataCard } from "./_components/data-card";
 import { Chart } from "./_components/chart";
